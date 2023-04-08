@@ -60,20 +60,13 @@ app.get("/forms", (req, res) => {
   });
 });
 
-app.get("/forms/:id", (req, res) => {
+app.get('/forms/:id', (req, res) => {
   const id = req.params.id;
-  pool.query("SELECT * FROM codforms WHERE id = ?", [id], (err, rows) => {
-    if (err) {
-      console.error("Error while executing query", err);
-      return res.status(500).send("Internal Server Error");
-    }
-    if (rows.length === 0) {
-      return res.status(404).send("Form not found");
-    }
-    res.send(rows[0]);
+  pool.query('SELECT * FROM codforms WHERE id = ?', id, (error, results, fields) => {
+    if (error) throw error;
+    res.send(results[0]);
   });
 });
-
 
 app.post("/forms", (req, res) => {
     const {
