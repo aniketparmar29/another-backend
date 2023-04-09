@@ -75,7 +75,7 @@ app.delete('/forms/:id', (req, res) => {
   // Delete the coupon from the database
   pool.query('DELETE FROM codforms WHERE id = ?', id, (error, results, fields) => {
     if (error) throw error;
-    res.send('Coupon deleted successfully.');
+    res.send('invoice deleted successfully.');
   });
 });
 
